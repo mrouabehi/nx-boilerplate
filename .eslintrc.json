@@ -1,0 +1,63 @@
+{
+    "root": true,
+    "ignorePatterns": ["**/*"],
+    "plugins": ["@nx", "@typescript-eslint/eslint-plugin"],
+    "extends": ["plugin:@typescript-eslint/recommended"],
+    "rules": {
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "indent": ["error", 4],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "arrow-spacing": ["error", { "before": true, "after": true }],
+        "no-trailing-spaces": ["error", { "ignoreComments": true }],
+        "space-before-blocks": ["error", "always"],
+        "space-before-function-paren": ["error", "always"],
+        "keyword-spacing": ["error", { "before": true, "after": true }],
+        "max-params": ["error", 5],
+        "max-depth": ["error", 4],
+        "max-lines-per-function": ["error", { "max": 25, "skipComments": true, "skipBlankLines": true }],
+        "object-curly-spacing": ["error", "always"],
+        "block-spacing": ["error", "always"],
+        "brace-style": ["error", "1tbs"]
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+            "rules": {
+                "@nx/enforce-module-boundaries": [
+                    "error",
+                    {
+                        "enforceBuildableLibDependency": true,
+                        "allow": [],
+                        "depConstraints": [
+                            {
+                                "sourceTag": "*",
+                                "onlyDependOnLibsWithTags": ["*"]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "files": ["*.ts", "*.tsx"],
+            "extends": ["plugin:@nx/typescript"],
+            "rules": {}
+        },
+        {
+            "files": ["*.js", "*.jsx"],
+            "extends": ["plugin:@nx/javascript"],
+            "rules": {}
+        },
+        {
+            "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+            "env": {
+                "jest": true
+            },
+            "rules": {}
+        }
+    ]
+}
